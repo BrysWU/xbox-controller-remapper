@@ -242,29 +242,20 @@ namespace XboxControllerRemapper
 
         public void PressKey(VirtualKeyCode vk)
         {
-            INPUT input = new INPUT
-            {
-                type = INPUT_KEYBOARD,
-                u = new InputUnion
-                {
-                    ki = new KEYBDINPUT
-                    {
-                        wVk = (ushort)vk,
-                        wScan = 0,
-                        dwFlags = KEYEVENTF_KEYDOWN,
-                        time = 0,
-                        dwExtraInfo = IntPtr.Zero
-                    }
-                }
-            };
+            INPUT[] inputs = new INPUT[1];
+            inputs[0].type = INPUT_KEYBOARD;
+            inputs[0].u.ki.wVk = (ushort)vk;
+            inputs[0].u.ki.wScan = 0;
+            inputs[0].u.ki.dwFlags = KEYEVENTF_KEYDOWN;
+            inputs[0].u.ki.time = 0;
+            inputs[0].u.ki.dwExtraInfo = IntPtr.Zero;
 
-            INPUT[] inputs = { input };
             uint result = SendInput(1, inputs, INPUT_SIZE);
             
             if (result == 0)
             {
                 int error = Marshal.GetLastWin32Error();
-                throw new Exception($"SendInput failed with error code: {error}");
+                throw new Exception($"SendInput failed on key press with error code: {error}");
             }
 
             if (!keyStates.ContainsKey(vk))
@@ -275,29 +266,20 @@ namespace XboxControllerRemapper
 
         public void ReleaseKey(VirtualKeyCode vk)
         {
-            INPUT input = new INPUT
-            {
-                type = INPUT_KEYBOARD,
-                u = new InputUnion
-                {
-                    ki = new KEYBDINPUT
-                    {
-                        wVk = (ushort)vk,
-                        wScan = 0,
-                        dwFlags = KEYEVENTF_KEYUP,
-                        time = 0,
-                        dwExtraInfo = IntPtr.Zero
-                    }
-                }
-            };
+            INPUT[] inputs = new INPUT[1];
+            inputs[0].type = INPUT_KEYBOARD;
+            inputs[0].u.ki.wVk = (ushort)vk;
+            inputs[0].u.ki.wScan = 0;
+            inputs[0].u.ki.dwFlags = KEYEVENTF_KEYUP;
+            inputs[0].u.ki.time = 0;
+            inputs[0].u.ki.dwExtraInfo = IntPtr.Zero;
 
-            INPUT[] inputs = { input };
             uint result = SendInput(1, inputs, INPUT_SIZE);
             
             if (result == 0)
             {
                 int error = Marshal.GetLastWin32Error();
-                throw new Exception($"SendInput failed with error code: {error}");
+                throw new Exception($"SendInput failed on key release with error code: {error}");
             }
 
             if (keyStates.ContainsKey(vk))
