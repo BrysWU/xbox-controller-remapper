@@ -1,0 +1,54 @@
+<Window x:Class="XboxControllerRemapper.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Xbox Controller Remapper" Height="500" Width="600"
+        WindowStartupLocation="CenterScreen"
+        Background="#F0F0F0">
+    <Grid>
+        <StackPanel Margin="20" VerticalAlignment="Top">
+            <TextBlock Text="Xbox Controller Remapper" FontSize="24" FontWeight="Bold" Margin="0,0,0,20" Foreground="#333333"/>
+            
+            <GroupBox Header="Controller Selection" Padding="15" Margin="0,0,0,15">
+                <StackPanel>
+                    <TextBlock Text="Select Xbox Controller:" Margin="0,0,0,10" FontWeight="SemiBold"/>
+                    <ComboBox x:Name="ControllerComboBox" Height="35" FontSize="14" Padding="10,8"/>
+                    <Button x:Name="RefreshButton" Content="Refresh Devices" Height="35" Margin="0,10,0,0" Click="RefreshButton_Click" Background="#4CAF50" Foreground="White" FontWeight="SemiBold"/>
+                </StackPanel>
+            </GroupBox>
+            
+            <GroupBox Header="Button Mapping" Padding="15" Margin="0,0,0,15">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    
+                    <TextBlock Text="Controller Button:" Grid.Row="0" Grid.Column="0" Margin="0,0,10,10" VerticalAlignment="Center" FontWeight="SemiBold"/>
+                    <ComboBox x:Name="ControllerButtonComboBox" Grid.Row="0" Grid.Column="1" Height="35" FontSize="12" Padding="10,8" Margin="0,0,0,10"/>
+                    
+                    <TextBlock Text="Map to Key:" Grid.Row="1" Grid.Column="0" Margin="0,0,10,10" VerticalAlignment="Center" FontWeight="SemiBold"/>
+                    <ComboBox x:Name="KeyComboBox" Grid.Row="1" Grid.Column="1" Height="35" FontSize="12" Padding="10,8" Margin="0,0,0,10"/>
+                    
+                    <Button x:Name="ApplyButton" Content="Apply Mapping" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Height="40" Click="ApplyButton_Click" Background="#2196F3" Foreground="White" FontWeight="SemiBold" Margin="0,10,0,0"/>
+                </Grid>
+            </GroupBox>
+            
+            <GroupBox Header="Status" Padding="15" Margin="0,0,0,15">
+                <StackPanel>
+                    <TextBlock x:Name="StatusText" Text="Status: Waiting for controller..." Foreground="#666666" TextWrapping="Wrap" Margin="0,0,0,10"/>
+                    <TextBlock x:Name="MappingStatusText" Text="Current Mapping: None" Foreground="#333333" FontWeight="SemiBold" TextWrapping="Wrap"/>
+                </StackPanel>
+            </GroupBox>
+            
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <Button x:Name="StartButton" Content="Start Listening" Height="40" Width="150" Click="StartButton_Click" Background="#4CAF50" Foreground="White" FontWeight="SemiBold" Margin="0,0,10,0"/>
+                <Button x:Name="StopButton" Content="Stop Listening" Height="40" Width="150" Click="StopButton_Click" Background="#f44336" Foreground="White" FontWeight="SemiBold" IsEnabled="False"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>
